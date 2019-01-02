@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y python-pip \
 
 RUN pip install scapy
 
-ADD "base_script" "base_script"
+RUN curl https://raw.githubusercontent.com/Avielyo10/DNS-Amplification-Lab/master/scripts/base_script --output base_script
 
 RUN chmod a+x base_script
 

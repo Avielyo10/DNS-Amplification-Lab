@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y python-pip \
 
 RUN pip install scapy
 
-ADD "sniffer" "sniffer" 
+RUN curl https://raw.githubusercontent.com/Avielyo10/DNS-Amplification-Lab/master/scripts/sniffer --output sniffer 
 
 RUN chmod a+x sniffer
 
