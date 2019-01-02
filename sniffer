@@ -1,0 +1,34 @@
+ #!/usr/bin/env python
+
+from scapy.all import *
+
+def dns_sniff(pkt):
+    """ parse dns request / response packet """
+    if pkt and pkt.haslayer('UDP') and pkt.haslayer('DNS'):
+        ip = pkt['IP']
+        udp = pkt['UDP']
+        dns = pkt['DNS']
+        
+        # dns response packet
+        if (dns.ancount != 0):
+            # dns DNSRR count (answer count)
+            for i in range(dns.ancount):
+                dnsrr = dns.an[i]
+                print "DNS Response: %s:%s <- %s:%d : %s - %s" % (
+                    ip.dst, udp.dport,
+                    ip.src, udp.sport,
+                    dnsrr.rrname, dnsrr.rdata)
+        # dns request packet
+        else:
+            qname = dns.qd.qname
+            print "\nDNS Request: %s:%d -> %s:%d : %s" % (
+            ip.src, udp.sport, ip.dst, udp.dport, qname)
+
+
+def main():
+    # capture dns request and response
+    sniff(filter="udp port 53", prn=dns_sniff)
+
+
+if __name__ == "__main__":
+    main()
