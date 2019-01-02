@@ -1,13 +1,12 @@
 FROM ubuntu
 
 RUN apt-get update && apt-get install -y python-pip \
-    curl \
     sudo \
     tcpdump 
 
 RUN pip install scapy
 
-RUN curl https://raw.githubusercontent.com/Avielyo10/DNS-Amplification-Lab/master/scripts/sniffer --output sniffer 
+ADD "scripts/sniffer" "sniffer"
 
 RUN chmod a+x sniffer
 
