@@ -56,12 +56,16 @@ Run DNS3 on background:
 
 Here we can see a screenshot of `basic_script` from the Attacker container.
 Modify this script to send a DNS request with Sniff's IP, you can use any DNS container you want for this task.   
-Then run: `sudo python basic_script`. You should see DNS answers on Sniff's screen. 
+Then run: `sudo python basic_script`. 
+
+Describe what do you see on Sniff's screen?
 
 ![basic Scapy script](images/basic-DNS-script.png)
 
 ### Task 2: Improve `basic_script`.
 Now that we understand how to spoof our own DNS packets, lets improve our code!
+
+To see the load on the network open a new terminal and run: `docker exec -ti Sniff bash`, you should see Sniff's terminal, run `bmon`.
 
 #### Task 2.1: loop it!
 Modify our `basic_script` to send spoofed DNS requests in a loop! you can use any DNS container you want for this task. 
